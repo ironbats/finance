@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Delega Controle | Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+	<div>
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/Template/menuheader.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+
+	<p:layout style="min-width:500px;min-height:700px;">
+		<p:layoutUnit position="west" size="200" header="Menus"
+			resizable="false" closable="false" collapsible="false">
+			<div id="Header">
+				<ui:insert name="Header">
+					<ui:include src="/resources/Template/menuesquerda.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200" header="Log" resizable="true"
+			closable="true" collapsible="true" effect="drop"></p:layoutUnit>
+
+		<p:layoutUnit position="center" header="HOME OFFICE" resizable="false"
+			closable="false" collapsible="false">
+
+			<center>
+				<h:form id="idform">
+					<p:panelGrid columns="1" columnClasses="semBorda">
+						<p:commandButton value="Novo"
+							onclick="PF('novoLoginform').show();"
+							actionListener="#{regrasBean.ZeraCamposaoSelecionar}" />
+
+						<p:dataTable id="idtable" resizableColumns="false"
+							resizeMode="false" var="log" value="#{regrasBean.lisLogins}"
+							selection="#{regrasBean.login}" selectionMode="single"
+							rowKey="#{log.idLogin}" paginator="true" rows="8">
+
+							<f:facet name="header">
+								<p:outputPanel>
+									<p:outputLabel value="Pesquisa " />
+									<p:inputText placeholder="Pesquisa Global" />
+								</p:outputPanel>
+							</f:facet>
+
+							<p:column headerText="ID">
+								<p:outputLabel value="#{log.idLogin}" />
+							</p:column>
+
+							<p:column headerText="Login">
+								<p:outputLabel value="#{log.loginUsuario}" />
+							</p:column>
+
+							<p:column headerText="Nome Completo">
+								<p:outputLabel value="#{log.nomeCompleto}" />
+							</p:column>
+
+							<p:column headerText="E-MAIL">
+								<p:outputLabel value="#{log.emailUsuario}" />
+							</p:column>
+
+
+							<p:column headerText="DelegaPermissao">
+								<p:commandButton value="Edita"
+									oncomplete="PF('dialogDelega').show()" ajax="true"
+									update=":formdialogEdita:idPermissao">
+
+								</p:commandButton>
+							</p:column>
+
+							<p:column headerText="ExcluirPermissao">
+								<p:commandButton value="Exclui">
+								</p:commandButton>
+							</p:column>
+
+						</p:dataTable>
+					</p:panelGrid>
+				</h:form>
+			</center>
+
+		</p:layoutUnit>
+	</p:layout>
+	
+	<h:form id="formCadLogin">
+
+
+     
+		<p:dialog id="idDialogLogin" widgetVar="novoLoginform" modal="true"
+			footer="Dialog de Login" header="Preencha os Dados">
+			
+			<p:panelGrid columns="1"  styleClass="semBorda" id="panelValid">
+				<p:messages id="msgs" autoUpdate="true" closable="true" />
+			
+            </p:panelGrid>
+			
+			<p:panelGrid styleClass="semBorda" columns="3" id="panel">
+
+				<p:outputLabel value="Nome Completo" for="nomeCompleto" />
+				<p:inputText id="nomeCompleto"
+					value="#{regrasBean.login.nomeCompleto}" required="true"
+					requiredMessage="Nome e Necessario " />
+				<p:message for="nomeCompleto" display="icon" />
+
+
+				<p:outputLabel value="Login" for="idlogin" />
+				<p:inputText id="idlogin" value="#{regrasBean.login.loginUsuario}"
+					maxlength="8" required="true"
+					requiredMessage="Login e Necessario e somente com 8 caracteres" />
+				<p:message for="idlogin" display="icon" />
+
+				<p:outputLabel value="Senha" for="idsenha" />
+				<p:password id="idsenha" value="#{regrasBean.login.senhaUsuario}"
+					maxlength="6" required="true"
+					requiredMessage="Senha Necessarioa e somente com 6 caracteres" />
+				<p:message for="idsenha" display="icon" />
+
+				<p:outputLabel value="Departamento" for="iddepartamento" />
+				<p:inputText id="iddepartamento"
+					value="#{regrasBean.login.departamentoUsuario}" required="true"
+					requiredMessage="Departamento e Necessario " />
+				<p:message for="iddepartamento" display="icon" />
+
+				<p:outputLabel value="Ativo ?" for="idAtivo" />
+				<p:selectBooleanCheckbox id="idAtivo"
+					value="#{regrasBean.login.ativo}" required="true"
+					requiredMessage="Ativo e Necessario " />
+				<p:message for="idAtivo" display="icon" />
+
+				<p:outputLabel value="Cargo" for="idCargo" />
+				<p:inputText id="idCargo" value="#{regrasBean.login.cargo}"
+					required="true" requiredMessage="Cargo e Necessario " />
+				<p:message for="idCargo" display="icon" />
+
+				<p:outputLabel value="Email" for="idEmail" />
+				<p:inputText id="idEmail" value="#{regrasBean.login.emailUsuario}"
+					required="true" requiredMessage="Email e Necessario " />
+				<p:message for="idEmail" display="icon" />
+
+
+
+			</p:panelGrid>
+			
+			
+				<p:commandButton value="Salvar Dados"
+					actionListener="#{regrasBean.SalvarLoginCriado}"
+					update="panel, msgs" icon="ui-icon-check" >
+					
+					</p:commandButton>
+		</p:dialog>
+	</h:form>
+
+	<h:form id="formdialogEdita">
+		<p:dialog header="Delega Permissao" widgetVar="dialogDelega"
+			id="idPermissao" resizable="false" showEffect="fade"
+			hideEffect="explode" modal="true" draggable="true" maximizable="true"
+			minimizable="true">
+
+			<p:panelGrid columns="2" id="idgrid">
+				<p:outputLabel value="ID" />
+				<p:outputLabel value="#{regrasBean.login.idLogin}" />
+				<p:outputLabel value="Login" />
+				<p:outputLabel value="#{regrasBean.login.loginUsuario}" />
+
+				<p:selectOneMenu label="Delega Permissao Adm."
+					value="#{regrasBean.idRole}"
+					disabled="#{not empty regrasBean.idRole}">
+					<f:selectItems value="#{regrasBean.autoridade}"
+						itemValue="nomeRole"></f:selectItems>
+				</p:selectOneMenu>
+
+				<p:commandButton value="Confirma Regra"
+					action="#{regrasBean.confirmaSelecao}" update="idgrid"
+					disabled="#{not empty regrasBean.idRole}"></p:commandButton>
+				<p:commandButton value="Altera Regra"
+					actionListener="#{regrasBean.alterSelecao}" update="idgrid"></p:commandButton>
+
+				<p:commandButton value="Vingula Regra"
+					actionListener="#{regrasBean.atualizaRegra}" ajax="false"></p:commandButton>
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	
+
+</h:body>
+</html>

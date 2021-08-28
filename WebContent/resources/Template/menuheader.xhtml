@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<h:head>
+
+	<title>Menus Esquerda - Portal FR</title>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+
+
+</h:head>
+<h:body>
+	<h:form>
+		<p:menubar>
+			<p:submenu label="Inicio" icon="ui-icon-home">
+			<p:menuitem value="Pagina Inicial" url="/pages/index.xhtml"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="Relatorios" icon="ui-icon-document">
+				<p:menuitem value="Empresas Cadastradas"
+					actionListener="#{empresajasper.jasper}" />
+			</p:submenu>
+
+			<p:submenu label="Ajuda">
+			</p:submenu>
+
+			<p:submenu label="Acoes">
+				<p:menuitem value="Bloquear Empresas"></p:menuitem>
+				<p:menuitem value="Mini Agenda"></p:menuitem>
+			</p:submenu>
+
+
+
+			<f:facet name="options">
+				<p:inputText label="Pesquisa Global" title="Pesquisa Global"
+					placeholder="Pesquisa Global" />
+				<p:commandButton  value="Logout"
+					actionListener="#{usuarioBean.logout}"  icon="ui-icon-close" ajax="false" />
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
+</h:body>
+</html>

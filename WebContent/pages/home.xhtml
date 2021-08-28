@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>#{msg['sistema.titulo']}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="no-cache" />
+	<meta http-equiv="Cache-control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<link
+		href="${facesContext.externalContext.requestContextPath}/resources/css/layout.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="${facesContext.externalContext.requestContextPath}/resources/css/reset.css"
+		rel="stylesheet" type="text/css" />
+	<!-- [if IE]>
+            <link href="${facesContext.externalContext.requestContextPath}/resources/css/ie.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+</h:head>
+
+<h:body>
+	<h:form id="form" prependId="false">
+		<f:view>
+			<h:outputLabel value="#{msg['label.meusAmigos']}" />
+			<br />
+			<br />
+			<ui:repeat var="amigo" value="#{autenticacaoController.amigos}">
+				<h:outputLink target="_blank" value="#{amigo.link}">
+					<h:outputLabel style="cursor: pointer" value="#{amigo.name}" />
+				</h:outputLink>
+				<br />
+			</ui:repeat>			
+			<br />
+			<br />
+			<h:commandButton value="#{msg['link.desconectar']}" actionListener="#{autenticacaoController.encerraSessao}" />
+		</f:view>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<title>#{msg['sistema.titulo']}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta http-equiv="Cache-control" content="no-cache" />
+	<meta http-equiv="Cache-control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="expires" content="0" />
+	<link
+		href="${facesContext.externalContext.requestContextPath}/resources/css/layout.css"
+		rel="stylesheet" type="text/css" />
+	<link
+		href="${facesContext.externalContext.requestContextPath}/resources/css/reset.css"
+		rel="stylesheet" type="text/css" />
+	<!-- [if IE]>
+            <link href="${facesContext.externalContext.requestContextPath}/resources/css/ie.css" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+</h:head>
+
+<h:body onload="loadPage()">
+	<h:form id="form" prependId="false">
+		<f:view>
+
+
+			<f:metadata>
+				<f:event type="preRenderView"
+					listener="#{autenticacaoController.processLoginFacebook}" />
+			</f:metadata>
+
+			<h:panelGroup layout="block">
+				<h:messages id="messages" />
+			</h:panelGroup>
+
+			<h:panelGroup id="pgrContaFacebook" layout="block"
+				rendered="#{autenticacaoController.exibeCriaContaFacebook}">
+
+				<div>
+					<h:outputLabel styleClass="letraTitulo"
+						value="Crie sua conta com o Facebook" />
+				</div>
+
+				<div style="padding-top: 10px;">
+
+					<h:panelGrid id="pgrCadastro" columns="2" cellspacing="5">
+					
+						<h:outputText id="optEmailUsuario" styleClass="fonteMyriad"
+							value="#{msg['usuario.email']}" />
+						<h:inputText id="iptEmail" required="true"
+							value="#{autenticacaoController.login.emailUsuario}"
+							requiredMessage="#{msg['usuario.email.requerido']}"
+							maxlength="30" size="50" tabindex="1" />
+
+						<h:outputText id="optSenhaUsuario" styleClass="fonteMyriad"
+							value="#{msg['usuario.senha']}" />
+						<h:inputSecret id="j_password" tabindex="2" required="true"
+							value="#{autenticacaoController.login.password}"
+							 size="30"
+							maxlength="30" />
+							<!-- requiredMessage="#{msg['usuario.senha.requerido']}" -->
+					</h:panelGrid>
+					
+					<h:inputText id="j_username" style="display: none;"
+						value="#{autenticacaoController.login.username}" />
+
+					<div id="botoes" style="position: relative; margin-top: 20px;">
+						<h:commandButton id="cbtCriarConta" type="submit"
+							title="Crie sua conta" value="Criar conta"
+							actionListener="#{autenticacaoController.salvarUsuarioFacebook}"
+							tabindex="3" />
+						<h:commandButton id="cbtVoltar" styleClass="botaoArredondado"
+							immediate="true" action="/Login.xhtml?faces-redirect=true"
+							value="Voltar" title="Voltar para a página de login" tabindex="5" />
+					</div>
+
+				</div>
+
+			</h:panelGroup>
+			
+		</f:view>
+	</h:form>
+</h:body>
+</html>

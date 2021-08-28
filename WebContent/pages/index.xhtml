@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Inicio - Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<div>
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/Template/menuheader.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+
+	<p:layout style="min-width:500px;min-height:700px;">
+
+		<p:layoutUnit position="west" size="200" header="Menus"
+			resizable="false" closable="false" collapsible="false">
+
+			<div id="Header">
+				<ui:insert name="Header">
+					<ui:include src="/resources/Template/menuesquerda.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200" header="Log" resizable="true"
+			closable="true" collapsible="true" effect="drop"></p:layoutUnit>
+
+		<p:layoutUnit position="center"
+			header="Home Office Controle Financeiro" resizable="false"
+			closable="false" collapsible="false">
+			<p:outputLabel value="Ola #{usuarioBean.userName}"></p:outputLabel>
+
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

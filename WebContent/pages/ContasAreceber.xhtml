@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Inicio - Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript name="jquery-1.11.3.min.js" library="js" target="head" />
+	<h:outputScript name="jquery.maskMoney.js" library="js" target="body" />
+	<h:outputScript name="mascaraDoubles.js" library="js" target="body" />
+	<h:outputScript name="mascaraDoubles.js" library="js" target="form" />
+</h:head>
+
+<h:body>
+
+	<div>
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/Template/menuheader.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+
+	<p:layout style="min-width:500px;min-height:700px;">
+
+		<p:layoutUnit position="west" size="200" header="Menus"
+			resizable="false" closable="false" collapsible="false">
+
+			<div id="Header">
+				<ui:insert name="Header">
+					<ui:include src="/resources/Template/menuesquerda.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200" header="Log" resizable="true"
+			closable="true" collapsible="true" effect="drop"></p:layoutUnit>
+
+		<p:layoutUnit position="center"
+			header="Home Office Controle Financeiro" resizable="false"
+			closable="false" collapsible="false">
+
+
+
+
+			<h:form id="formNovoCad">
+				<p:fieldset legend="Novo Cadastro">
+					<p:panelGrid columns="1" styleClass="semBorda">
+
+						<p:commandButton value="Nova Conta"
+							actionListener="#{contasapagarbean.zeraCampos2}"
+							onclick="PF('novoFormReceb').show();">
+						</p:commandButton>
+					</p:panelGrid>
+				</p:fieldset>
+			</h:form>
+
+			<h:form id="forminit">
+
+				<p:fieldset legend="Listagem de Recebimento">
+					<p:dataTable id="idtbl" paginator="true" rows="8"
+						value="#{countReceveBean.listContasRecev}" styleClass="semBorda"
+						var="contas">
+						<f:facet name="header">
+							<p:inputText placeholder="Pesquisa Global" />
+						</f:facet>
+
+						<p:column headerText="ID">
+							<p:outputLabel value="#{contas.idempresasareceber}" />
+						</p:column>
+
+
+						<p:column headerText="Nome Empresa">
+							<p:outputLabel value="#{contas.nomeEmpresa}" />
+						</p:column>
+
+
+
+						<p:column headerText="Data Recebimento">
+							<p:outputLabel value="#{contas.dataRecebimento}">
+								<f:convertDateTime pattern="dd/MM/yy"></f:convertDateTime>
+							</p:outputLabel>
+						</p:column>
+
+
+						<p:column headerText="Valor a Receber">
+							<p:outputLabel value="#{contas.valorAreceber}">
+								<f:convertNumber currencySymbol="R$" locale="pt_BR"
+									pattern="#,##0.00" />
+							</p:outputLabel>
+						</p:column>
+
+						<p:column headerText="Editar">
+							<p:commandButton value="Editar"
+								oncomplete="PF('dialogAlterar').show()">
+								<f:setPropertyActionListener value="#{contas}"
+									target="#{contasapagarbean.contasApagarCad}" />
+
+							</p:commandButton>
+						</p:column>
+
+
+						<p:column headerText="Excluir">
+							<p:commandButton value="Excluir"
+								oncomplete="PF('excluidados').show()">
+								<f:setPropertyActionListener value="#{contas}"
+									target="#{contasapagarbean.contasApagarCad}" />
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+
+		</p:layoutUnit>
+	</p:layout>
+
+	<h:form id="formEdit" prependId="false">
+		<p:dialog id="idDialogedit" widgetVar="dialogAlterar" modal="true"
+			footer="Alterar Dados" header="Alteracao">
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+				<p:outputLabel value="Nome Empresa/Cliente" />
+
+				<p:selectOneListbox id="listboxEdit" label="Favorecido"
+					filter="true"
+					value="#{contasapagarbean.contasApagarCad.nomeEmpresa}"
+					filterMatchMode="contains">
+					<f:selectItems value="#{contasapagarbean.listaFavorecidos}" />
+
+
+				</p:selectOneListbox>
+
+				<p:outputLabel value="CNPJ" />
+				<p:inputMask mask="99.999.999/9999-99" required="true"
+					requiredMessage="Por favor Informe um CNPJ VALIDO"
+					value="#{contasapagarbean.contasApagarCad.CNPJ}" />
+
+				<p:outputLabel value="Endereco" for="idenderecoEdit" />
+				<p:inputText id="idenderecoEdit" size="15"
+					value="#{contasapagarbean.contasApagarCad.enderecoEmpresa}" />
+
+				<p:outputLabel value="Telefone Contato" />
+				<p:inputMask mask="(99)9999-9999"
+					value="#{contasapagarbean.contasApagarCad.telefoneContato}" />
+
+
+				<p:outputLabel value="UFVO" />
+				<p:selectOneMenu label="UFVO"
+					value="#{contasapagarbean.contasApagarCad.ufvo}"
+					converter="converter" required="true">
+					<f:selectItems value="#{contasapagarbean.UFVO}"></f:selectItems>
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Data Cadastro" />
+				<p:calendar pattern="dd/MM/yyy" locale="pt_BR" showOn="button"
+					mindate="today" maxdate="today" required="true"
+					requiredMessage="Por favor preenchda a Data de Cadastro"
+					value="#{contasapagarbean.contasApagarCad.dataCadastroConta}"
+					readonly="true">
+				</p:calendar>
+
+				<p:outputLabel for="iddatavencimentoedit" value="Data Vencimen." />
+				<p:calendar id="iddatavencimentoedit" pattern="dd/MM/yyy"
+					locale="pt_BR" showOn="button" mindate="today" required="true"
+					requiredMessage="Por favor preencha a Data de Vencimento"
+					value="#{contasapagarbean.contasApagarCad.dataVencimento}">
+				</p:calendar>
+
+
+				<p:outputLabel value="Valor A pagar" />
+				<p:inputText id="idDouble2Edit" required="true"
+					requiredMessage="Preencha Corretamente"
+					value="#{contasapagarbean.contasApagarCad.valorApagar}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00" />
+				</p:inputText>
+
+				<p:outputLabel value="Tipo Pagamento" for="idtipopagamentoEdit" />
+				<p:selectOneMenu id="idtipopagamentoEdit"
+					value="#{contasapagarbean.contasApagarCad.descricaoOuTipoPagamento}">
+					<f:selectItems value="#{contasapagarbean.tipoPag}" />
+
+				</p:selectOneMenu>
+			</p:panelGrid>
+
+			<p:commandButton value="Alterar"
+				actionListener="#{contasapagarbean.alterarDados}" />
+		</p:dialog>
+	</h:form>
+
+
+	<h:form id="FormNovo2" prependId="false">
+		<p:dialog id="idformnovo" widgetVar="novoFormReceb"
+			header="Cadastro de Contas a Receber" modal="true">
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+
+				<p:outputLabel value="Nome Empresa/Cliente" />
+
+				<p:selectOneListbox id="listbox" label="Favorecido" filter="true"
+					value="#{countReceveBean.formacount.nomeEmpresa}"
+					filterMatchMode="contains" validatorMessage="Nao foi possivel">
+					<f:selectItems value="#{countReceveBean.listFav}"></f:selectItems>
+				</p:selectOneListbox>
+
+
+
+				<p:outputLabel for="iddatavencimento" value="Data Recebimento" />
+				<p:calendar id="iddatavencimento" pattern="dd/MM/yyy" locale="pt_BR"
+					showOn="button" mindate="today" required="true"
+					requiredMessage="Por favor preencha a Data de Recebimento"
+					value="#{countReceveBean.formacount.dataDeRecebimento}">
+				</p:calendar>
+
+
+				<p:outputLabel value="Valor A pagar" />
+				<p:inputText id="idDouble2" required="true"
+					requiredMessage="Preencha Corretamente"
+					value="#{countReceveBean.formacount.valorAmountReceber}">
+					<f:convertNumber locale="pt_BR" pattern="#,##0.00" />
+				</p:inputText>
+
+				<p:commandButton value="Gravar" 
+					action="#{countReceveBean.salvarDados}"   onclick="PF('FormNovo2').hide()" />
+
+
+
+
+			</p:panelGrid>
+
+		</p:dialog>
+	</h:form>
+
+
+
+	<h:form id="formexcluir" prependId="false">
+		<p:confirmDialog header="Exclui Dados"
+			message="Deseja Excluir os dados do Cliente  #{contasapagarbean.contasApagarCad.nomeEmpresa} Selecionado ?"
+			severity="alert" widgetVar="excluidados" id="excluirDialog">
+			<p:panelGrid columns="2" styleClass="semBorda" id="panelExcluir">
+				<p:commandButton value="Sim"
+					actionListener="#{contasapagarbean.excluirDados}"
+					update=":forminit:idtbl, :formexcluir:excluirDialog" />
+				<p:commandButton value="Nao" onclick="PF('excluidados').hide()"
+					actionListener="#{contasapagarbean.zeraCampos}" />
+			</p:panelGrid>
+		</p:confirmDialog>
+	</h:form>
+
+</h:body>
+</html>

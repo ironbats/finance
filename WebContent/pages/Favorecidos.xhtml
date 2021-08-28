@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Favorecidos - Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<div>
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/Template/menuheader.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+
+	<p:layout style="min-width:500px;min-height:700px;">
+
+		<p:layoutUnit position="west" size="200" header="Menus"
+			resizable="false" closable="false" collapsible="false">
+
+			<div id="Header">
+				<ui:insert name="Header">
+					<ui:include src="/resources/Template/menuesquerda.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200" header="Log" resizable="true"
+			closable="true" collapsible="true" effect="drop"></p:layoutUnit>
+
+		<p:layoutUnit position="center"
+			header="Home Office Controle Financeiro" resizable="false"
+			closable="false" collapsible="false">
+
+			<h:form id="forminit">
+				<p:fieldset legend="Novo Cadastro" styleClass="semBorda">
+					<p:panelGrid columns="1" styleClass="semBorda">
+						<p:commandButton value="Novo." onclick="PF('favorecidos').show()" />
+					</p:panelGrid>
+				</p:fieldset>
+
+				<p:fieldset legend="Cadastros">
+
+					<p:dataTable id="idtbl" paginator="true" rows="8"
+						value="#{favorecidosbean.listFavorecidos}" var="fav">
+
+						<p:column headerText="ID">
+							<p:outputLabel value="#{fav.idfavorecidos}" />
+						</p:column>
+
+						<p:column headerText="Nome Favorecido">
+							<p:outputLabel value="#{fav.nomeFavorecidos}" />
+						</p:column>
+
+						<p:column headerText="Descricao">
+							<p:outputLabel value="#{fav.descricaoFavorecidos}" />
+						</p:column>
+
+						<p:column headerText="Editar">
+							<p:commandButton value="Editar"
+								oncomplete="PF('editaFavorecidos').show();"
+								update=":formEdita:dialogEdit">
+								<f:setPropertyActionListener value="#{fav}"
+									target="#{favorecidosbean.favorecidos}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+
+
+						<p:column headerText="Excluir">
+							<p:commandButton value="Excluir"
+								oncomplete="PF('confirmaExclusao').show();" update="">
+								<f:setPropertyActionListener value="#{fav}"
+									target="#{favorecidosbean.favorecidos}"></f:setPropertyActionListener>
+							</p:commandButton>
+						</p:column>
+					</p:dataTable>
+				</p:fieldset>
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+	<h:form id="formExclui">
+		<p:confirmDialog id="idDialogConfirm" widgetVar="confirmaExclusao"
+			header="Exclui Cadastro"
+			message="Tem certeza que Deseja Excluir o Favorecido:   #{favorecidosbean.favorecidos.nomeFavorecidos}"
+			severity="alert">
+
+			<p:commandButton value="Sim"
+				oncomplete="PF('confirmaExclusao').hide()" update=":forminit"
+				actionListener="#{favorecidosbean.excluirFavorecidos}" />
+
+			<p:commandButton value="Nao"
+				oncomplete="PF('confirmaExclusao').hide()" update=":forminit" />
+
+		</p:confirmDialog>
+	</h:form>
+
+	<h:form id="formEdita">
+		<p:dialog id="dialogEdit" widgetVar="editaFavorecidos" modal="true">
+
+			<p:panelGrid columns="2" styleClass="semBorda">
+
+				<p:outputLabel value="ID" />
+				<p:outputLabel value="#{favorecidosbean.favorecidos.idfavorecidos}" />
+
+				<p:outputLabel value="Nome Favorecido" />
+				<p:inputText value="#{favorecidosbean.favorecidos.nomeFavorecidos}" />
+
+				<p:outputLabel value="Data Cadastro" />
+				<p:calendar value="#{favorecidosbean.favorecidos.dataCadastro}"
+					pattern="dd/MM/yyy" locale="pt_BR" showOn="button" mindate="today"
+					maxdate="today" required="true"
+					requiredMessage="Por favor preenchda a Data de Cadastro" />
+
+
+				<p:outputLabel value="Descricao Favorecido" />
+				<p:inputTextarea
+					value="#{favorecidosbean.favorecidos.descricaoFavorecidos}" />
+
+				<p:commandButton value="Editar"
+					actionListener="#{favorecidosbean.editaFavorecidos}"
+					update=":forminit" onclick="PF('editaFavorecidos').hide()" />
+
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<h:form id="formNovo" prependId="false">
+		<p:dialog id="dialogfavorecidos" widgetVar="favorecidos" modal="true">
+			<p:panelGrid styleClass="semBorda" columns="2">
+
+				<p:outputLabel value="Favorecido" />
+				<p:inputText value="#{favorecidosbean.favorecidos.nomeFavorecidos}" />
+
+				<p:outputLabel value="Data Cadastro" />
+				<p:calendar pattern="dd/MM/yyy" locale="pt_BR" showOn="button"
+					mindate="today" maxdate="today" required="true"
+					requiredMessage="Por favor preenchda a Data de Cadastro"
+					value="#{favorecidosbean.favorecidos.dataCadastro}">
+				</p:calendar>
+
+				<p:outputLabel value="Descricao Favorecido" />
+				<p:inputTextarea
+					value="#{favorecidosbean.favorecidos.descricaoFavorecidos}"
+					addLine="true" autoResize="true" />
+
+				<p:commandButton value="Salvar"
+					actionListener="#{favorecidosbean.salvarFavorecidos}"
+					update=":forminit, :formNovo" />
+			</p:panelGrid>
+		</p:dialog>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2015-06-23T11:13:27 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empresasCadastradas" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4eedbb89-b4f6-4469-9ab6-f642a1688cf7">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ConexaoBancoatual"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#EEEFF0"/>
+		</conditionalStyle>
+	</style>
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CACED0">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#D8D8D8"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="tableDataset" uuid="f13e6d36-5148-4ecc-bbe3-3035def80980">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<queryString>
+		<![CDATA[select * from empresacad]]>
+	</queryString>
+	<field name="idEmpresa" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Apelido" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RazaoSocial" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="endereco" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ie" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ufvo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<group name="Gruppo1">
+		<groupExpression><![CDATA[$F{idEmpresa}]]></groupExpression>
+		<groupHeader>
+			<band height="20"/>
+		</groupHeader>
+		<groupFooter>
+			<band>
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Apelido">
+		<groupExpression><![CDATA[$F{Apelido}]]></groupExpression>
+	</group>
+	<group name="RazaoSocial">
+		<groupExpression><![CDATA[$F{RazaoSocial}]]></groupExpression>
+	</group>
+	<group name="bairro">
+		<groupExpression><![CDATA[$F{bairro}]]></groupExpression>
+	</group>
+	<group name="cidade">
+		<groupExpression><![CDATA[$F{cidade}]]></groupExpression>
+	</group>
+	<group name="cnpj">
+		<groupExpression><![CDATA[$F{cnpj}]]></groupExpression>
+	</group>
+	<group name="endereco">
+		<groupExpression><![CDATA[$F{endereco}]]></groupExpression>
+	</group>
+	<group name="ie">
+		<groupExpression><![CDATA[$F{ie}]]></groupExpression>
+	</group>
+	<group name="ufvo">
+		<groupExpression><![CDATA[$F{ufvo}]]></groupExpression>
+	</group>
+	<title>
+		<band height="154" splitType="Stretch">
+			<staticText>
+				<reportElement x="95" y="0" width="210" height="25" uuid="e622555d-198b-4ccd-a4a1-c59c53304058">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Industrias Rodrigues]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="95" y="25" width="205" height="15" uuid="c226e44d-3bb5-4145-b0b3-903bf1d79fde"/>
+				<text><![CDATA[Terceiro sargento]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="150" width="556" height="1" uuid="07258e60-cbd9-4707-b4a1-ab27f374283f">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<staticText>
+				<reportElement x="110" y="60" width="376" height="30" uuid="d22fa71c-3f4b-4009-9941-88ce860e0096"/>
+				<textElement>
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatorio Empresas Cadastradas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="37">
+			<staticText>
+				<reportElement x="3" y="0" width="65" height="30" uuid="24090bf5-f5ae-4924-88a9-08193bd6d700"/>
+				<text><![CDATA[Razao Social]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="3" width="70" height="30" uuid="106a08e6-2d70-4306-b81e-1f9db974e3f2"/>
+				<text><![CDATA[Bairro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="3" width="80" height="30" uuid="9f16ae94-1db6-4402-a4df-198ca38a4a06"/>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="3" width="75" height="30" uuid="3363d738-4dba-485f-82ce-9a8612ff2a1d"/>
+				<text><![CDATA[Cnpj]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="3" width="65" height="30" uuid="4efeacf3-01bd-46cb-b6fd-c2f9520d773e"/>
+				<text><![CDATA[I.E]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="480" y="0" width="76" height="30" uuid="d7953f59-b5aa-4577-ae4a-00cd74031d78"/>
+				<text><![CDATA[UF]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="36" width="556" height="1" uuid="806ce5df-1219-4876-ae0c-ca7405b1f246">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="45">
+			<textField>
+				<reportElement x="0" y="0" width="70" height="30" uuid="3edde553-d172-4aa3-995a-44e884f08e8b"/>
+				<textFieldExpression><![CDATA[$F{RazaoSocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="70" height="30" uuid="fa7f26f3-70ab-4a71-94c4-034178577d12"/>
+				<textFieldExpression><![CDATA[$F{bairro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="80" height="30" uuid="e151f62a-aa33-492a-aea0-b64fe5e79afd"/>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="75" height="30" uuid="203a3e7c-e67d-483d-b39e-ad9cfea45bc1"/>
+				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="65" height="30" uuid="e8947556-c24d-414d-9c5a-8b398fd64ae9"/>
+				<textFieldExpression><![CDATA[$F{ie}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="69" height="30" uuid="c6da51ac-611e-4294-8b4f-35a609d5c974"/>
+				<textFieldExpression><![CDATA[$F{ufvo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-20" y="35" width="556" height="1" uuid="55a44461-af11-4d9c-99be-fde36880c342">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+	<lastPageFooter>
+		<band height="177">
+			<staticText>
+				<reportElement positionType="Float" mode="Opaque" x="0" y="147" width="556" height="30" backcolor="#E6E8E9" uuid="36aa233d-4305-48e6-974a-1bbf89bb3c8f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Serif" size="9" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[THANKYOU FOR YOUR BUSINESS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="457" y="100" width="100" height="30" uuid="e5092e55-e2e6-4cd3-b033-c5038b66af3b"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</lastPageFooter>
+</jasperReport>

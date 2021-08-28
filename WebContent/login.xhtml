@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Login - Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body styleClass="imagem" onload="loadPage();">
+
+
+	<p:dialog header="Login" visible="true" closable="false"
+		draggable="false" resizable="false" width="500px" style="border: none">
+		<h:form id="idtbl" prependId="false">
+			<center>
+				<div align="center">
+					<p:graphicImage library="imagem" name="logofinanceiro.png"></p:graphicImage>
+				</div>
+
+
+				<div>
+
+					<p:panelGrid columns="2" styleClass="semBorda">
+
+						<h:outputLabel value="Login" for="userName" />
+						<p:inputText id="userName" value="#{usuarioBean.userName}"
+							required="true" requiredMessage="Login inválido" />
+
+						<h:outputLabel value="Senha" for="password" />
+						<p:password id="password" value="#{usuarioBean.password}"
+							feedback="true" required="true" requiredMessage="Senha inválida" />
+						<p:commandButton type="submit" id="login"
+							actionListener="#{usuarioBean.loginUsuario}" value="Ok"
+							ajax="false" />
+
+					</p:panelGrid>
+				</div>
+
+
+
+
+
+			</center>
+		</h:form>
+	</p:dialog>
+</h:body>
+</html>

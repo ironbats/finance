@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<title>Contas - Home Office</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<div>
+		<ui:insert name="cabecalho">
+			<ui:include src="/resources/Template/menuheader.xhtml"></ui:include>
+		</ui:insert>
+	</div>
+
+	<p:layout style="min-width:500px;min-height:700px;">
+		<p:layoutUnit position="west" size="200" header="Menus"
+			resizable="false" closable="false" collapsible="false">
+			<div id="Header">
+				<ui:insert name="Header">
+					<ui:include src="/resources/Template/menuesquerda.xhtml"></ui:include>
+				</ui:insert>
+			</div>
+		</p:layoutUnit>
+
+		<p:layoutUnit position="east" size="200" header="Log" resizable="true"
+			closable="true" collapsible="true" effect="drop"></p:layoutUnit>
+
+		<p:layoutUnit position="center"
+			header="Home Office Controle Financeiro" resizable="false"
+			closable="false" collapsible="false">
+			<h:form id="forminit">
+			
+			<p:dataTable id="idtbl" paginator="true" rows="8">
+			<f:facet name="header">
+			<p:inputText placeholder="Pesquisa Global"/>
+			</f:facet>
+			
+			<p:column headerText="Id Contas">
+			<p:outputLabel/>
+			</p:column>
+			
+			<p:column headerText="Valor da Conta">
+			<p:outputLabel/>
+			</p:column>
+			
+			<p:column headerText="Data">
+			<p:outputLabel/>
+			</p:column>
+			
+			<p:column headerText="Nome Empresa">
+			<p:outputLabel/>
+			</p:column>
+			
+			</p:dataTable>
+			
+			<center>			
+			<p:panelGrid columns="2" styleClass="semBorda">
+			<p:commandButton value="Valor a Receber"></p:commandButton>
+			<p:commandButton value="Valor a Pagar"></p:commandButton>
+			</p:panelGrid>
+			</center>
+            </h:form>
+
+		</p:layoutUnit>
+	</p:layout>
+</h:body>
+</html>

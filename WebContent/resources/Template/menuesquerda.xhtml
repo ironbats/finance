@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags">
+<h:head>
+	<title>Menus Esquerda - Homeoffice</title>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
+</h:head>
+<h:body>
+	<h:form id="MenuEsquerda">
+		<p:panelMenu>
+			<p:submenu label="Controle Geral"
+				>
+
+				<p:menuitem value="Delegar Controle" actionListener="#"
+					url="/pages/DelegaControle.xhtml"></p:menuitem>
+				<p:menuitem value="Liberacao de TOKEN" actionListener="#"></p:menuitem>
+			</p:submenu>
+		</p:panelMenu>
+
+		<p:panelMenu>
+			<p:submenu label="Cadastros">
+				<p:menuitem value="Produtos a Pagar" actionListener="#"
+					></p:menuitem>
+				<p:menuitem value="Favorecidos" url="/pages/Favorecidos.xhtml"></p:menuitem>
+				<p:menuitem value="Cadastro Bancos"></p:menuitem>
+				<p:menuitem value="A pagar" url="/pages/ContasApagar.xhtml"></p:menuitem>
+				<p:menuitem value="A receber" url="/pages/ContasAreceber.xhtml"></p:menuitem>
+				<p:menuitem value="Contas"></p:menuitem>
+			</p:submenu>
+		</p:panelMenu>
+
+		<p:panelMenu>
+			<p:submenu label="Financeiro"
+				>
+				<p:menuitem value="Pagamentos"></p:menuitem>
+				<p:menuitem value="Caixa"  ></p:menuitem>
+				<p:menuitem value="Movimentacoes" url="/pages/Contas.xhtml"></p:menuitem>
+				
+
+			</p:submenu>
+		</p:panelMenu>
+	</h:form>
+</h:body>
+</html>
